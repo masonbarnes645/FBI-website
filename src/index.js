@@ -7,25 +7,20 @@ function getData(url) {
 getData('https://api.fbi.gov/wanted/v1/list')
 
 function extractInfo(wantedObj) {
-    let messyName = wantedObj.title;
+    let name = wantedObj.title;
     
-    if(messyName.includes(" - ")){
-        const nameArray = messyName.split(" - ")
+    if(name.includes(" - ")){
+        const nameArray = name.split(" - ")
         const cleanerName = nameArray[0]
 
-        messyName = cleanerName
+       name = cleanerName
     }
-    else if (messyName.includes("-")){
-        messyName = messyName.split("-").join("/-/")
-    }
-    
-    console.log(messyName)
 
     const image = wantedObj.images[0].large;
     const description = wantedObj.description;
     const path = wantedObj.path
 
-    createWantedDiv(messyName, image, description, path)
+    createWantedDiv(name, image, description, path)
 }
 
 
@@ -40,6 +35,8 @@ function createWantedDiv (name, image, description, path) {
     const pPath = document.createElement("p")
 
     div.id = name.split(' ').join("-").split(",").join('')
+    div.className = "wanted-divs"
+
 
     img.src = image
     img.alt = name
@@ -53,6 +50,5 @@ function createWantedDiv (name, image, description, path) {
 
     wantedList.appendChild(div)
 
-    
-
 }
+
