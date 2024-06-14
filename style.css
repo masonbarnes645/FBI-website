@@ -26,4 +26,7 @@ img {
 #overlay {
     z-index: 1;
     position: absolute;
+    background-color: white;
+    align-self: center;
+    align-items: center;
 }

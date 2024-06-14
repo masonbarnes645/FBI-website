@@ -6,9 +6,24 @@ function getData(url) {
 }
 getData('https://api.fbi.gov/wanted/v1/list')
 
+
 //! Global variables
 const wantedList = document.querySelector("#wanted-list")
 const overlay = document.querySelector("#overlay");
+
+let overlayDivEntered =true;
+let mouseLeftWantedDiv = true;
+let mouseLeftOverlayDiv = false;
+
+overlay.addEventListener("mouseover", (e) => {
+    mouseLeftOverlayDiv = false
+    overlayDivEntered = true;
+
+})
+overlay.addEventListener("mouseleave", (e)=> {
+    mouseLeftOverlayDiv = true;
+    onMouseLeave()
+})
 
 // Extracts info from a wanted obj and creates a div for it 
 // as long as that person is not a missing person
@@ -62,13 +77,18 @@ function createWantedDiv (name, image, description, path, wantedObj) {
 
     div.append(h3, img, pDescription, pPath)
     div.addEventListener("mouseover", (e) => {
+        mouseLeftWantedDiv = false;
+        // If the div is empty
         if (!overlay.innerHTML) {
             populateDivOverlay(name, image, wantedObj)
         }
 
         })
 
-    //div.addEventListener("mouseleave", (e) => onMouseLeave())
+    div.addEventListener("mouseleave", (e) => {
+        mouseLeftWantedDiv = true;
+        onMouseLeave()
+    })
 
     wantedList.appendChild(div)
 
@@ -97,5 +117,8 @@ function populateDivOverlay(cleanerName, image, wantedObj) {
 }
 
 function onMouseLeave() {
-    overlay.innerHTML = ""
+    if (((overlayDivEntered && mouseLeftOverlayDiv) && mouseLeftWantedDiv)|| (!overlayDivEntered && mouseLeftWantedDiv))  {
+        overlay.innerHTML = ""
+    }
+    
 }
