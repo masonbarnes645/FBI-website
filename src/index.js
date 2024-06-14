@@ -62,3 +62,13 @@ function createWantedDiv (name, image, description, path) {
 
 }
 
+
+
+function searchData(){
+
+}
+
+// get array of objects from .json file
+// iterate over that array and filter to include results filter()
+// display results on page
+// make search bar to use

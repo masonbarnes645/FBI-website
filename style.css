@@ -22,3 +22,10 @@ h1 {
 img {
     width: 25%;
 }
+
+#search-bar{
+    padding: 5px;
+    margin-top: 10px;
+    margin-right: 17px;
+    font-size: 18px;
+}
