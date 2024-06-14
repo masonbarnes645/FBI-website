@@ -9,21 +9,6 @@ getData('https://api.fbi.gov/wanted/v1/list')
 
 //! Global variables
 const wantedList = document.querySelector("#wanted-list")
-const overlay = document.querySelector("#overlay");
-
-let overlayDivEntered =true;
-let mouseLeftWantedDiv = true;
-let mouseLeftOverlayDiv = false;
-
-overlay.addEventListener("mouseover", (e) => {
-    mouseLeftOverlayDiv = false
-    overlayDivEntered = true;
-
-})
-overlay.addEventListener("mouseleave", (e)=> {
-    mouseLeftOverlayDiv = true;
-    onMouseLeave()
-})
 
 // Extracts info from a wanted obj and creates a div for it 
 // as long as that person is not a missing person
@@ -44,15 +29,18 @@ function extractInfo(wantedObj) {
     const description = wantedObj.description;
     const path = wantedObj.path
 
+    const reward = wantedObj.reward_text
+    const warning = wantedObj.warning_text
+
     //If statement to exclude missing persons 
     if (!path.includes("missing-persons")) {
-            createWantedDiv(name, image, description, path, wantedObj)
+            createWantedDiv(name, image, description, path, reward, warning)
         }
 }
 
 
 // Create the div elements for each wanted person
-function createWantedDiv (name, image, description, path, wantedObj) {
+function createWantedDiv (name, image, description, path, reward, warning) {
     
 
     // Create div and children elements
@@ -61,6 +49,10 @@ function createWantedDiv (name, image, description, path, wantedObj) {
     const img = document.createElement("img")
     const pDescription = document.createElement("p")
     const pPath = document.createElement("p")
+
+    const pWarning = document.createElement("p")
+    const pReward = document.createElement("p")
+
 
     //Give each div a unique id and a class name for CSS
     div.id = name.split(' ').join("-").split(",").join('')
@@ -76,49 +68,22 @@ function createWantedDiv (name, image, description, path, wantedObj) {
     pPath.textContent = path
 
     div.append(h3, img, pDescription, pPath)
+    
     div.addEventListener("mouseover", (e) => {
-        mouseLeftWantedDiv = false;
-        // If the div is empty
-        if (!overlay.innerHTML) {
-            populateDivOverlay(name, image, wantedObj)
-        }
+        pWarning.textContent = warning
+        pReward.textContent = reward
+        div.classList.add("detail-view")
 
-        })
+        div.append(pWarning, pReward)
+    })
 
     div.addEventListener("mouseleave", (e) => {
-        mouseLeftWantedDiv = true;
-        onMouseLeave()
+       pWarning.remove()
+       pReward.remove()
+
+       div.classList.remove("detail-view")
     })
 
     wantedList.appendChild(div)
 
-}
-
-function populateDivOverlay(cleanerName, image, wantedObj) {
-    
-
-    const h3 = document.createElement("h3")
-    const img = document.createElement("img")
-    const pWarning = document.createElement("p")
-    const pReward = document.createElement("p")
-    const pDescription = document.createElement("p")
-
-    h3.textContent = cleanerName
-    pWarning.textContent = wantedObj.warning_message
-    pReward.textContent = wantedObj.reward_text
-    pDescription.textContent = wantedObj.description
-
-
-    img.src = image
-    img.alt = cleanerName
-
-    overlay.append(h3, img, pWarning, pReward, pDescription)
-
-}
-
-function onMouseLeave() {
-    if (((overlayDivEntered && mouseLeftOverlayDiv) && mouseLeftWantedDiv)|| (!overlayDivEntered && mouseLeftWantedDiv))  {
-        overlay.innerHTML = ""
-    }
-    
 }
