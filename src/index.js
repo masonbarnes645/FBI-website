@@ -72,3 +72,8 @@ function searchData(){
 // iterate over that array and filter to include results filter()
 // display results on page
 // make search bar to use
+
+
+    const fugitiveList = document.querySelector('#wanted-list');
+    console.log(fugitiveList);
+  
