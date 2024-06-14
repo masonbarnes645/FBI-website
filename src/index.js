@@ -1,7 +1,12 @@
+let criminalList;
+
 function getData(url) {
     fetch(url)
     .then(res => res.json())
-    .then(people => people.items.forEach(extractInfo))
+    .then(people => {
+        criminalList = people
+        people.items.forEach(extractInfo)
+    })
     .catch(err => console.log(err))
 }
 getData('https://api.fbi.gov/wanted/v1/list')
@@ -63,20 +68,37 @@ function createWantedDiv (name, image, description, path) {
 }
 
 
-
+const searchBar = document.querySelector('#search-bar input')
 function searchData(){
-
+  
+    const fugitiveList = document.querySelectorAll('#wanted-list > div');    
+    //const fugitiveArray = Array.from(fugitiveListChildren)
+    const fugitiveArray = Array.from(fugitiveList);
+    //console.log(fugitiveArray)
+    fugitiveArray.forEach(function(child) {
+        const childText = child.querySelector('h3').textContent.toUpperCase()
+        if (!childText.includes(searchBar.value.toUpperCase())){
+                child.remove()
+        }
+    })
 }
-
+ // child.querySelector('h3').textContent.toUpperCase().includes(searchBar.value.toUpperCase())   
 // get array of objects from .json file
 // iterate over that array and filter to include results filter()
 // display results on page
 // make search bar to use
 // hide elements that do not match
 
-    const searchBar = document.querySelector('#search-bar input')
-    const fugitiveList = document.querySelector('#wanted-list');
-    searchBar.addEventListener('input', function(){
-        console.log(searchBar.value)
-    })
-  
+   
+    searchBar.addEventListener('input', searchData)
+    //     const searchResults = fugitiveArray.filter((searchType) => searchType.textContent === searchBar.value)
+    //     console.log(searchBar.value)
+    // })
+    
+//    Array.from(fugitiveListChildren).forEach(div => {
+//     const name = div.h3.textContent
+//     console.log(name)
+//    })
+
+
+  // if word contains searchBar.value, then return children of fugitiveList that match input, and hide those that dont 
