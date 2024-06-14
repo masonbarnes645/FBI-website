@@ -22,3 +22,8 @@ h1 {
 img {
     width: 25%;
 }
+
+#overlay {
+    z-index: 1;
+    position: absolute;
+}
