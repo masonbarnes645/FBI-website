@@ -23,9 +23,9 @@ img {
     width: 25%;
 }
 
-#search-bar{
-    padding: 5px;
-    margin-top: 10px;
+#search-bar input[type=text] {
+    padding: 3px;
+    margin-top: 11px;
     margin-right: 17px;
     font-size: 18px;
 }
