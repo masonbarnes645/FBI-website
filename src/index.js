@@ -30,7 +30,7 @@ function extractInfo(wantedObj) {
     const path = wantedObj.path
 
     const reward = wantedObj.reward_text
-    const warning = wantedObj.warning_text
+    const warning = wantedObj.warning_message
 
     //If statement to exclude missing persons 
     if (!path.includes("missing-persons")) {
