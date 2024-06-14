@@ -27,13 +27,13 @@ function extractInfo(wantedObj) {
 
     //If statement to exclude missing persons 
     if (!path.includes("missing-persons")) {
-            createWantedDiv(name, image, description, path)
+            createWantedDiv(name, image, description, path, wantedObj)
         }
 }
 
 
 // Create the div elements for each wanted person
-function createWantedDiv (name, image, description, path) {
+function createWantedDiv (name, image, description, path, wantedObj) {
     const wantedList = document.querySelector("#wanted-list")
 
     // Create div and children elements
@@ -57,8 +57,24 @@ function createWantedDiv (name, image, description, path) {
     pPath.textContent = path
 
     div.append(h3, img, pDescription, pPath)
+    div.addEventListener("mouseenter", (e) => console.log(`Mouse entered ${name} div. ${e}`))
+    div.addEventListener("mouseleave", (e) => console.log(`Mouse left ${name} div. ${e}`))
 
     wantedList.appendChild(div)
 
 }
 
+function populateDivOverlay(cleanerName, wantedObj) {
+    const overlayTarget = document.querySelector("#overlay");
+
+    const h3 = document.createElement("h3")
+    const img = document.createElement("img")
+    const pWarning = document.createElement("p")
+    const pReward = document.createElement("p")
+    const pDescription = document.createElement("p")
+
+    h3.textContent = cleanerName
+    pWarning.textContent = wantedObj.warning_message
+    pReward.textContent = wantedObj.reward_text
+    
+}
