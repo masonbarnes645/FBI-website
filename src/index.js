@@ -72,8 +72,11 @@ function searchData(){
 // iterate over that array and filter to include results filter()
 // display results on page
 // make search bar to use
+// hide elements that do not match
 
-
+    const searchBar = document.querySelector('#search-bar input')
     const fugitiveList = document.querySelector('#wanted-list');
-    console.log(fugitiveList);
+    searchBar.addEventListener('input', function(){
+        console.log(searchBar.value)
+    })
   
