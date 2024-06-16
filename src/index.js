@@ -72,22 +72,34 @@ const searchBar = document.querySelector('#search-bar input')
 function searchData(){
   
     const fugitiveList = document.querySelectorAll('#wanted-list > div');    
-    //const fugitiveArray = Array.from(fugitiveListChildren)
     const fugitiveArray = Array.from(fugitiveList);
-    //console.log(fugitiveArray)
     fugitiveArray.forEach(function(child) {
         const childText = child.querySelector('h3').textContent.toUpperCase()
         if (!childText.includes(searchBar.value.toUpperCase())){
-                child.remove()
-        }
-    })
-}
- // child.querySelector('h3').textContent.toUpperCase().includes(searchBar.value.toUpperCase())   
+                child.style.display="none"
+                console.log(fugitiveArray);}
+            else{
+                child.style.display=""
+            }
+        
+            })};
+
+
+
+
+
+
+
+
+  // child.querySelector('h3').textContent.toUpperCase().includes(searchBar.value.toUpperCase())   
 // get array of objects from .json file
 // iterate over that array and filter to include results filter()
 // display results on page
 // make search bar to use
 // hide elements that do not match
+
+
+
 
    
     searchBar.addEventListener('input', searchData)
