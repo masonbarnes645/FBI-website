@@ -77,7 +77,6 @@ function searchData() {
         const childText = child.querySelector('h3').textContent.toUpperCase()
         if (!childText.includes(searchBar.value.toUpperCase())) {
             child.style.display = "none"
-            console.log(fugitiveArray);
         }
         else {
             child.style.display = ""
