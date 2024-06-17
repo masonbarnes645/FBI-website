@@ -64,8 +64,9 @@ function createWantedDiv (name, image, description, path, reward, warning) {
 
     //Give each div a unique id and a class name for CSS
     div.id = name.split(' ').join("-").split(",").join('')
-    if (!path.includes("missing-persons")) div.className = "wanted-divs"
-        else div.className = 'missing-divs'
+    if (path.includes("missing-persons")) div.className = "missing-divs"
+        else if (path.includes("kidnap")) div.className = "missing-divs"
+        else div.className = 'wanted-divs'
 
 
     img.src = image
@@ -116,17 +117,9 @@ function searchData() {
 };
 
 
-let missingButtonProp = true
+let missingButtonProp = false
 const missingButton = document.querySelector('#toggle-switch')
-
 missingButton.addEventListener('click', switchProp)
-
-
-
-
-
-
-
 
 function displayChange() {
     const fugitiveList = document.querySelectorAll('#wanted-list > div');
@@ -150,21 +143,13 @@ function displayChange() {
         });
     }
 }
-
-
-
-
-
-
-
-
 function switchProp() {
-    if (missingButtonProp === false) {      
-        missingButtonProp = true
+    if (missingButtonProp === true) {      
+        missingButtonProp = false
         displayChange()
     }
     else { 
-        missingButtonProp = false
+        missingButtonProp = true
         displayChange()
     }
 
