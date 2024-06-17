@@ -11,6 +11,10 @@ function getData(url) {
 }
 getData('https://api.fbi.gov/wanted/v1/list')
 
+
+//! Global variables
+const wantedList = document.querySelector("#wanted-list")
+
 // Extracts info from a wanted obj and creates a div for it 
 // as long as that person is not a missing person
 function extractInfo(wantedObj) {
@@ -30,16 +34,19 @@ function extractInfo(wantedObj) {
     const description = wantedObj.description;
     const path = wantedObj.path
 
+    const reward = wantedObj.reward_text
+    const warning = wantedObj.warning_message
+
     //If statement to exclude missing persons 
     if (!path.includes("missing-persons")) {
-            createWantedDiv(name, image, description, path)
+            createWantedDiv(name, image, description, path, reward, warning)
         }
 }
 
 
 // Create the div elements for each wanted person
-function createWantedDiv (name, image, description, path) {
-    const wantedList = document.querySelector("#wanted-list")
+function createWantedDiv (name, image, description, path, reward, warning) {
+    
 
     // Create div and children elements
     const div = document.createElement("div")
@@ -47,6 +54,10 @@ function createWantedDiv (name, image, description, path) {
     const img = document.createElement("img")
     const pDescription = document.createElement("p")
     const pPath = document.createElement("p")
+
+    const pWarning = document.createElement("p")
+    const pReward = document.createElement("p")
+
 
     //Give each div a unique id and a class name for CSS
     div.id = name.split(' ').join("-").split(",").join('')
@@ -62,6 +73,21 @@ function createWantedDiv (name, image, description, path) {
     pPath.textContent = path
 
     div.append(h3, img, pDescription, pPath)
+    
+    div.addEventListener("mouseover", (e) => {
+        pWarning.textContent = warning
+        pReward.textContent = reward
+        div.classList.add("detail-view")
+
+        div.append(pWarning, pReward)
+    })
+
+    div.addEventListener("mouseleave", (e) => {
+       pWarning.remove()
+       pReward.remove()
+
+       div.classList.remove("detail-view")
+    })
 
     wantedList.appendChild(div)
 
@@ -97,5 +123,4 @@ function searchData() {
 
 
    
-    
-   
+       
