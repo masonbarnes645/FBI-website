@@ -2,6 +2,7 @@ function getData(url) {
     fetch(url)
     .then(res => res.json())
     .then(people => {
+        criminalList = people
         people.items.forEach(extractInfo)
     })
     .catch(err => console.log(err))
@@ -11,6 +12,8 @@ getData('https://api.fbi.gov/wanted/v1/list')
 
 //! Global variables
 const wantedList = document.querySelector("#wanted-list")
+const fugitiveList = document.querySelectorAll('#wanted-list > div');
+const fugitiveArray = Array.from(fugitiveList);
 
 // Extracts info from a wanted obj and creates a div for it 
 // as long as that person is not a missing person
@@ -35,11 +38,13 @@ function extractInfo(wantedObj) {
     const warning = wantedObj.warning_message
 
     //If statement to exclude missing persons 
-    if (!path.includes("missing-persons")) {
+    //if (!path.includes("missing-persons")) 
             createWantedDiv(name, image, description, path, reward, warning)
-        }
+      
+        
     
 }
+
 
 
 // Create the div elements for each wanted person
@@ -59,7 +64,8 @@ function createWantedDiv (name, image, description, path, reward, warning) {
 
     //Give each div a unique id and a class name for CSS
     div.id = name.split(' ').join("-").split(",").join('')
-    div.className = "wanted-divs"
+    if (!path.includes("missing-persons")) div.className = "wanted-divs"
+        else div.className = 'missing-divs'
 
 
     img.src = image
@@ -89,14 +95,15 @@ function createWantedDiv (name, image, description, path, reward, warning) {
 
     wantedList.appendChild(div)
 
+ 
+
 }
-
-
+const missing = document.querySelectorAll('#wanted-list > div.missing-divs')
+const wanted = document.querySelectorAll('#wanted-list > div.wanted-divs')
 const searchBar = document.querySelector('#search-bar input')
 searchBar.addEventListener('input', searchData)
 function searchData() {
-    const fugitiveList = document.querySelectorAll('#wanted-list > div');
-    const fugitiveArray = Array.from(fugitiveList);
+    
     fugitiveArray.forEach(function (child) {
         const childText = child.querySelector('h3').textContent.toUpperCase()
         if (!childText.includes(searchBar.value.toUpperCase())) {
@@ -111,19 +118,22 @@ function searchData() {
 
 
 let missingButtonProp = true
-const missingButton =  document.querySelector('#toggle-switch')
+const missingButton = document.querySelector('#toggle-switch')
 
 missingButton.addEventListener('click', switchProp)
 
-function switchProp(){
-    if (missingButtonProp === false){
-         missingButtonProp = true 
-        }
-    else{
-         missingButtonProp = false
-    }
+function switchProp() {
+
+    if (missingButtonProp === false) {
+        missingButtonProp = true;
+
+    } else {
+        missingButtonProp = false;
 
     }
+}
+
+    
 
 
 
@@ -132,10 +142,3 @@ function switchProp(){
 
 
 
-
-
-
-
-
-   
-       
