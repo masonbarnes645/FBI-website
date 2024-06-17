@@ -98,12 +98,11 @@ function createWantedDiv (name, image, description, path, reward, warning) {
  
 
 }
-const missing = document.querySelectorAll('#wanted-list > div.missing-divs')
-const wanted = document.querySelectorAll('#wanted-list > div.wanted-divs')
 const searchBar = document.querySelector('#search-bar input')
 searchBar.addEventListener('input', searchData)
 function searchData() {
-    
+    const fugitiveList = document.querySelectorAll('#wanted-list > div');
+    const fugitiveArray = Array.from(fugitiveList);
     fugitiveArray.forEach(function (child) {
         const childText = child.querySelector('h3').textContent.toUpperCase()
         if (!childText.includes(searchBar.value.toUpperCase())) {
@@ -122,18 +121,54 @@ const missingButton = document.querySelector('#toggle-switch')
 
 missingButton.addEventListener('click', switchProp)
 
-function switchProp() {
 
-    if (missingButtonProp === false) {
-        missingButtonProp = true;
 
+
+
+
+
+
+function displayChange() {
+    const fugitiveList = document.querySelectorAll('#wanted-list > div');
+    if (missingButtonProp === true) {
+        fugitiveList.forEach(child => {
+            let className = child.className; 
+            if (className === 'missing-divs') { 
+                child.style.display = '';
+            } else {
+                child.style.display = 'none';
+            }
+        });
     } else {
-        missingButtonProp = false;
-
+        fugitiveList.forEach(child => {
+            let className = child.className; 
+            if (className === 'wanted-divs') { 
+                child.style.display = '';
+            } else {
+                child.style.display = 'none';
+            }
+        });
     }
 }
 
-    
+
+
+
+
+
+
+
+function switchProp() {
+    if (missingButtonProp === false) {      
+        missingButtonProp = true
+        displayChange()
+    }
+    else { 
+        missingButtonProp = false
+        displayChange()
+    }
+
+}
 
 
 

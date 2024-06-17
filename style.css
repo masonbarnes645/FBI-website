@@ -37,7 +37,7 @@ h1 {
     outline-color: black;
     width: 25%;
     height: 25%;
-    display: none;
+    display: block;
 }
 
 .missing-divs h3 {
