@@ -1,7 +1,12 @@
+let criminalList;
+
 function getData(url) {
     fetch(url)
     .then(res => res.json())
-    .then(people => people.items.forEach(extractInfo))
+    .then(people => {
+        criminalList = people
+        people.items.forEach(extractInfo)
+    })
     .catch(err => console.log(err))
 }
 getData('https://api.fbi.gov/wanted/v1/list')
@@ -62,3 +67,35 @@ function createWantedDiv (name, image, description, path) {
 
 }
 
+
+const searchBar = document.querySelector('#search-bar input')
+searchBar.addEventListener('input', searchData)
+function searchData() {
+    const fugitiveList = document.querySelectorAll('#wanted-list > div');
+    const fugitiveArray = Array.from(fugitiveList);
+    fugitiveArray.forEach(function (child) {
+        const childText = child.querySelector('h3').textContent.toUpperCase()
+        if (!childText.includes(searchBar.value.toUpperCase())) {
+            child.style.display = "none"
+        }
+        else {
+            child.style.display = ""
+        }
+
+    })
+};
+
+
+
+
+
+
+
+
+
+
+
+
+   
+    
+   
