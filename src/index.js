@@ -147,10 +147,13 @@ function switchProp() {
     if (missingButtonProp === true) {      
         missingButtonProp = false
         displayChange()
+        missingButton.textContent = 'View Missing Persons'
     }
     else { 
         missingButtonProp = true
         displayChange()
+        missingButton.textContent = 'View Wanted Criminals'
+   
     }
 
 }
