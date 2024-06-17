@@ -1,10 +1,7 @@
-let criminalList;
-
 function getData(url) {
     fetch(url)
     .then(res => res.json())
     .then(people => {
-        criminalList = people
         people.items.forEach(extractInfo)
     })
     .catch(err => console.log(err))
@@ -41,6 +38,7 @@ function extractInfo(wantedObj) {
     if (!path.includes("missing-persons")) {
             createWantedDiv(name, image, description, path, reward, warning)
         }
+    
 }
 
 
@@ -110,6 +108,23 @@ function searchData() {
 
     })
 };
+
+
+let missingButtonProp = true
+const missingButton =  document.querySelector('#toggle-switch')
+
+missingButton.addEventListener('click', switchProp)
+
+function switchProp(){
+    if (missingButtonProp === false){
+         missingButtonProp = true 
+        }
+    else{
+         missingButtonProp = false
+    }
+
+    }
+
 
 
 
