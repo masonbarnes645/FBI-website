@@ -168,8 +168,7 @@ function switchProp() {
 }
 
 function clearFilter() {
-    const fugitiveList = document.querySelectorAll('#wanted-list > div');
-    if (missingButtonProp === true) {
+    const fugitiveList = document.querySelectorAll('#wanted-list > div');{
         fugitiveList.forEach(child => {
 
             child.style.display = '';
