@@ -99,22 +99,45 @@ function createWantedDiv (name, image, description, path, reward, warning) {
  
 
 }
+ 
+
+function dataSearch(array) {
+    array.forEach(function (child) {
+        const childText = child.querySelector('h3').textContent.toUpperCase();
+        if (!childText.includes(searchBar.value.toUpperCase())) {
+            child.style.display = "none";
+        } else {
+            child.style.display = "";
+        }
+    });
+}
+
+
+
+
 const searchBar = document.querySelector('#search-bar input')
 searchBar.addEventListener('input', searchData)
 function searchData() {
     const fugitiveList = document.querySelectorAll('#wanted-list > div');
     const fugitiveArray = Array.from(fugitiveList);
-    fugitiveArray.forEach(function (child) {
-        const childText = child.querySelector('h3').textContent.toUpperCase()
-        if (!childText.includes(searchBar.value.toUpperCase())) {
-            child.style.display = "none"
-        }
-        else {
-            child.style.display = ""
-        }
-
-    })
+    const missingArray = fugitiveArray.filter(child => {
+        let className = child.className;
+         return className === 'missing-divs';
+     });
+    const crimArray = fugitiveArray.filter(child => {
+        let className = child.className;
+         return className === 'wanted-divs';
+     });
+    
+    
+     dataSearch(fugitiveArray);
+     
+   
 };
+
+
+
+
 
 
 let missingButtonProp = false
@@ -148,20 +171,42 @@ function switchProp() {
         missingButtonProp = false
         displayChange()
         missingButton.textContent = 'View Missing Persons'
+        //masterArray = fugitiveArray
     }
     else { 
         missingButtonProp = true
         displayChange()
         missingButton.textContent = 'View Wanted Criminals'
-   
+        //masterArray = missingArray
+        
     }
 
 }
 
+// function searchArray() {
+//     fugitiveArray.forEach(function (child) {
+//         const childText = child.querySelector('h3').textContent.toUpperCase();
+//         if (!childText.includes(searchBar.value.toUpperCase())) {
+//             child.style.display = "none";
+//         } else {
+//             child.style.display = "";
+//         }
+//     });
+// }
 
 
 
 
 
+//!if true set masterArray to fugitiveArray, false, set masterArray to missingArray
 
+// fugitiveArray.forEach(function (child) {
+//     const childText = child.querySelector('h3').textContent.toUpperCase()
+//     if (!childText.includes(searchBar.value.toUpperCase())) {
+//         child.style.display = "none"
+//     }
+//     else {
+//         child.style.display = ""
+//     }
 
+// })
