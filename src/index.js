@@ -101,6 +101,13 @@ function createWantedDiv (name, image, description, path, reward, warning) {
 }
  
 
+const searchBar = document.querySelector('#search-bar input')
+let arrayValue = 0
+let missingButtonProp = false
+const missingButton = document.querySelector('#toggle-switch')
+missingButton.addEventListener('click', switchProp)
+searchBar.addEventListener('input', searchData)
+
 function dataSearch(array) {
     array.forEach(function (child) {
         const childText = child.querySelector('h3').textContent.toUpperCase();
@@ -112,11 +119,6 @@ function dataSearch(array) {
     });
 }
 
-
-
-
-const searchBar = document.querySelector('#search-bar input')
-searchBar.addEventListener('input', searchData)
 function searchData() {
     const fugitiveList = document.querySelectorAll('#wanted-list > div');
     const fugitiveArray = Array.from(fugitiveList);
@@ -129,21 +131,10 @@ function searchData() {
          return className === 'wanted-divs';
      });
     
-    
-     dataSearch(fugitiveArray);
-     
-   
+    console.log(missingArray)
+     dataSearch(fugitiveArray);  
 };
-
-
-
-
-
-
-let missingButtonProp = false
-const missingButton = document.querySelector('#toggle-switch')
-missingButton.addEventListener('click', switchProp)
-
+// changes style of divs to hid them, invoked thru switchprop
 function displayChange() {
     const fugitiveList = document.querySelectorAll('#wanted-list > div');
     if (missingButtonProp === true) {
@@ -166,47 +157,27 @@ function displayChange() {
         });
     }
 }
+// changes button text content, boolean, hides unwanted divs w/ displayChange
 function switchProp() {
     if (missingButtonProp === true) {      
         missingButtonProp = false
         displayChange()
         missingButton.textContent = 'View Missing Persons'
-        //masterArray = fugitiveArray
+        arrayValue = 1
     }
     else { 
         missingButtonProp = true
         displayChange()
         missingButton.textContent = 'View Wanted Criminals'
-        //masterArray = missingArray
+        arrayValue = 2
         
     }
 
 }
 
-// function searchArray() {
-//     fugitiveArray.forEach(function (child) {
-//         const childText = child.querySelector('h3').textContent.toUpperCase();
-//         if (!childText.includes(searchBar.value.toUpperCase())) {
-//             child.style.display = "none";
-//         } else {
-//             child.style.display = "";
-//         }
-//     });
-// }
 
 
 
 
 
-//!if true set masterArray to fugitiveArray, false, set masterArray to missingArray
 
-// fugitiveArray.forEach(function (child) {
-//     const childText = child.querySelector('h3').textContent.toUpperCase()
-//     if (!childText.includes(searchBar.value.toUpperCase())) {
-//         child.style.display = "none"
-//     }
-//     else {
-//         child.style.display = ""
-//     }
-
-// })
