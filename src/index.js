@@ -44,13 +44,13 @@ function extractInfo(wantedObj) {
     if (!path.includes("missing-persons")) {
         // Run appendChild here instead of in the create wanted div function so that we can re-use
         // createWantedDiv but prepend a div with our friends on it
-            wantedList.appendChild(createWantedDiv(name, image, description, path, reward, warning))
+            createWantedDiv(name, image, description, path, reward, warning, "append")
         }
 }
 
 
 // Create the div elements for each wanted person
-function createWantedDiv (name, image, description, path, reward, warning) {
+function createWantedDiv (name, image, description, path, reward, warning, position, id) {
     
 
     // Create div and children elements
@@ -62,6 +62,7 @@ function createWantedDiv (name, image, description, path, reward, warning) {
 
     const pWarning = document.createElement("p")
     const pReward = document.createElement("p")
+
 
 
     //Give each div a unique id and a class name for CSS
@@ -94,8 +95,13 @@ function createWantedDiv (name, image, description, path, reward, warning) {
        div.classList.remove("detail-view")
     })
 
-    // Return the div so we can append or prepend it to the wanted list
-    return div
+    position === "prepend" ? wantedList.prepend(div) : wantedList.append(div)
+
+    if (path.includes("friends")){
+        div.innerHTML += `<i id="trash-${div.id}" class="fa-solid fa-trash"></i>`
+        const trashIcon = document.querySelector(`#trash-${div.id}`)
+        trashIcon.addEventListener("click", (e) => deleteFriend(div, id))
+    }
 
 }
 
@@ -133,7 +139,8 @@ function handleSubmit(e) {
         crimes: e.target.crimes.value,
         warning: e.target.warning.value,
         reward: e.target.reward.value,
-        path: "/wanted/friends"
+        path: "/wanted/friends",
+        id: uuidv4().slice(0,4)
     }
     
     
@@ -144,11 +151,20 @@ function handleSubmit(e) {
         },
         body: JSON.stringify(newCriminal)
     }) 
+    .then(res => {
+        if (!res.ok) {
+            wantedList.children[0].remove()
+        }
+
+        else {
+            e.target.reset()
+        }
+    })
     .catch(err => console.log(err))
     
     // Optimistic approach
     extractFriendInfo(newCriminal)
-    e.target.reset()
+    
 }
 
 function extractFriendInfo(friendObj) {
@@ -158,7 +174,22 @@ function extractFriendInfo(friendObj) {
     const warning = friendObj.warning.toUpperCase();
     const reward = `The FBI is offering a reward of $${friendObj.reward} for the capture of ${friendObj.name}.`;
     const path = friendObj.path;
+    const id = friendObj.id
 
 
-    wantedList.prepend(createWantedDiv(name, image, crimes, path, reward, warning))
+    createWantedDiv(name, image, crimes, path, reward, warning, "prepend", id)
+}
+
+function deleteFriend(wantedDiv, id) {
+    const currentDivHTML = wantedDiv.innerHTML
+    
+    wantedDiv.remove()
+    
+    fetch(`http://localhost:3000/friends/${id}`, {method: 'DELETE'})
+    .then(res => {
+        if (!res.ok){
+            wantedList.innerHTML = currentDivHTML
+        }
+
+    })
 }
