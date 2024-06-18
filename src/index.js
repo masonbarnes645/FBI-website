@@ -149,6 +149,7 @@ function handleSubmit(e) {
     .then(obj => console.log(obj))
     .catch(err => console.log(err))
     
+    extractFriendInfo(newCriminal)
     e.target.reset()
 }
 

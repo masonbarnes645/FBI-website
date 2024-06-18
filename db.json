@@ -1,37 +1,21 @@
 {
   "friends": [
     {
-      "id": "6617",
-      "name": "test",
-      "image": "https://repository-images.githubusercontent.com/260096455/47f1b200-8b2e-11ea-8fa1-ab106189aeb0",
-      "crimes": "test",
-      "warning": "test",
-      "reward": "test"
-    },
-    {
-      "id": "0692",
-      "name": "test 2",
-      "image": "https://repository-images.githubusercontent.com/260096455/47f1b200-8b2e-11ea-8fa1-ab106189aeb0",
-      "crimes": "test 2",
-      "warning": "test 2",
-      "reward": "test 2"
-    },
-    {
-      "id": "4655",
-      "name": "test",
-      "image": "https://repository-images.githubusercontent.com/260096455/47f1b200-8b2e-11ea-8fa1-ab106189aeb0",
-      "crimes": "wfejkn",
-      "warning": "feknwjl",
-      "reward": "feknwj",
-      "path": "wanted/friends"
-    },
-    {
       "id": "9e15",
       "name": "Connor Page",
       "image": "https://repository-images.githubusercontent.com/260096455/47f1b200-8b2e-11ea-8fa1-ab106189aeb0",
       "crimes": "Murder",
       "warning": "Should be considered armed and dangerous",
       "reward": "25,000",
+      "path": "/wanted/friends"
+    },
+    {
+      "id": "2999",
+      "name": "Random person",
+      "image": "https://preview.redd.it/created-random-people-using-chatgpt-midjourney-do-you-know-v0-q1aa450i5dqb1.png?width=1024&format=png&auto=webp&s=c4e9abc47d193474a2fa1a7e337d9d9340dce947",
+      "crimes": "Murder",
+      "warning": "Should be considered armed and dangerous",
+      "reward": "55,000",
       "path": "/wanted/friends"
     }
   ]
