@@ -9,6 +9,7 @@ function getData(url) {
     })
     .catch(err => console.log(err))
 }
+
 getData('https://api.fbi.gov/wanted/v1/list')
 
 

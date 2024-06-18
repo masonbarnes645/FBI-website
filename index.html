@@ -12,6 +12,22 @@
         <h1>Most Wanted</h1>
     </div>
     <div id='search-bar'><input type="text" placeholder="Search..."></div>
+    <div id="add-criminal">
+        <button id="new-criminal-button">New Criminal</button>
+        <form id="new-criminal-form" class='hidden'>
+            <label for="name">Name:</label><br>
+            <input type="text" id="name"><br>
+            <label for="image">Image URL:</label><br>
+            <input type="text" id="image"><br>
+            <label for="crimes">Crimes:</label><br>
+            <input type="text" id="crimes"><br>
+            <label for="warning">Warning:</label><br>
+            <input type="text" id="warning"><br>
+            <label for="reward">Reward Amount:</label><br>
+            <input type="text" id="reward"><br>
+            <input type="submit" id="submit">
+        </form>
+    </div>
     <div id='wanted-list' class="flex-container"></div>
     
 </body>
