@@ -143,12 +143,10 @@ function handleSubmit(e) {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(newCriminal)
-    })
-    // Pessimistic approach 
-    .then(res => res.json())
-    .then(obj => console.log(obj))
+    }) 
     .catch(err => console.log(err))
     
+    // Optimistic approach
     extractFriendInfo(newCriminal)
     e.target.reset()
 }

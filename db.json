@@ -17,6 +17,24 @@
       "warning": "Should be considered armed and dangerous",
       "reward": "55,000",
       "path": "/wanted/friends"
+    },
+    {
+      "id": "9daf",
+      "name": "reload test",
+      "image": "https://repository-images.githubusercontent.com/260096455/47f1b200-8b2e-11ea-8fa1-ab106189aeb0",
+      "crimes": "Murder for Hire; Espionage",
+      "warning": "",
+      "reward": "6,000",
+      "path": "/wanted/friends"
+    },
+    {
+      "id": "5408",
+      "name": "optimistic test",
+      "image": "https://repository-images.githubusercontent.com/260096455/47f1b200-8b2e-11ea-8fa1-ab106189aeb0",
+      "crimes": "test; test",
+      "warning": "",
+      "reward": "7,000",
+      "path": "/wanted/friends"
     }
   ]
 }
