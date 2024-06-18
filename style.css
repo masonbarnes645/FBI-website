@@ -58,3 +58,11 @@ img {
    border: solid;
    
 }
+
+.hide {
+    display:none;
+}
+
+.show {
+    display: block;
+}

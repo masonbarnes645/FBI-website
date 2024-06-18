@@ -12,8 +12,7 @@ getData('https://api.fbi.gov/wanted/v1/list')
 
 //! Global variables
 const wantedList = document.querySelector("#wanted-list")
-const fugitiveList = document.querySelectorAll('#wanted-list > div');
-const fugitiveArray = Array.from(fugitiveList);
+
 
 // Extracts info from a wanted obj and creates a div for it 
 // as long as that person is not a missing person
@@ -114,13 +113,13 @@ function dataSearch(array) {
     array.forEach(function (child) {
         const childText = child.querySelector('h3').textContent.toUpperCase();
         if (!childText.includes(searchBar.value.toUpperCase())) {
-            child.style.display = "none";
+            child.classList.add('hide')
         } else {
-            child.style.display = "";
+            child.classList.remove('hide')
         }
     });
 }
-
+ 
 function searchData() {
     const fugitiveList = document.querySelectorAll('#wanted-list > div');
     const fugitiveArray = Array.from(fugitiveList);
@@ -129,50 +128,46 @@ function searchData() {
 // changes style of divs to hid them, invoked thru switchprop
 function displayChange() {
     const fugitiveList = document.querySelectorAll('#wanted-list > div');
-    if (missingButtonProp === true) {
+    
         fugitiveList.forEach(child => {
             let className = child.className; 
-            if (className === 'missing-divs') { 
-                child.style.display = '';
+            if (missingButtonProp){ 
+                if (className === 'missing-divs') { 
+                    child.style.display = '';
+                } else {
+                    child.style.display = 'none';
+                }
             } else {
-                child.style.display = 'none';
-            }
-        });
-    } else {
-        fugitiveList.forEach(child => {
-            let className = child.className; 
-            if (className === 'wanted-divs') { 
-                child.style.display = '';
-            } else {
-                child.style.display = 'none';
-            }
-        });
-    }
+       
+                if (className === 'wanted-divs') { 
+                    child.style.display = '';
+                } else {
+                    child.style.display = 'none';
+                }
+        };
+    })
 }
 // changes button text content, boolean, hides unwanted divs w/ displayChange
 function switchProp() {
-    if (missingButtonProp === true) {      
+    if (missingButtonProp) {      
         missingButtonProp = false
-        displayChange()
         missingButton.textContent = 'View Missing Persons'
-        arrayValue = 1
+       
     }
     else { 
         missingButtonProp = true
-        displayChange()
         missingButton.textContent = 'View Wanted Criminals'
-        arrayValue = 2
+        
         
     }
-
+displayChange()
 }
 
 function clearFilter() {
     const fugitiveList = document.querySelectorAll('#wanted-list > div');{
         fugitiveList.forEach(child => {
-
             child.style.display = '';
-
+            arrayValue = 0
         })
     }
 }
