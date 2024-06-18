@@ -15,6 +15,24 @@
       "crimes": "test 2",
       "warning": "test 2",
       "reward": "test 2"
+    },
+    {
+      "id": "4655",
+      "name": "test",
+      "image": "https://repository-images.githubusercontent.com/260096455/47f1b200-8b2e-11ea-8fa1-ab106189aeb0",
+      "crimes": "wfejkn",
+      "warning": "feknwjl",
+      "reward": "feknwj",
+      "path": "wanted/friends"
+    },
+    {
+      "id": "9e15",
+      "name": "Connor Page",
+      "image": "https://repository-images.githubusercontent.com/260096455/47f1b200-8b2e-11ea-8fa1-ab106189aeb0",
+      "crimes": "Murder",
+      "warning": "Should be considered armed and dangerous",
+      "reward": "25,000",
+      "path": "/wanted/friends"
     }
   ]
 }

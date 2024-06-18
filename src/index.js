@@ -5,8 +5,15 @@ function getData(url) {
     .catch(err => console.log(err))
 }
 
-getData('https://api.fbi.gov/wanted/v1/list')
+function getFriendData(url) {
+    fetch(url)
+    .then(res => res.json())
+    .then(list => list.forEach(extractFriendInfo))
+    .catch(err => console.log(err))
+}
 
+getData('https://api.fbi.gov/wanted/v1/list')
+getFriendData('http://localhost:3000/friends')
 
 //! Global variables
 const wantedList = document.querySelector("#wanted-list")
@@ -116,41 +123,43 @@ formRevealButton.addEventListener("click", (e) => console.log(`Button was clicke
 const form = document.querySelector('#new-criminal-form')
 form.addEventListener("submit", handleSubmit)
 
+//Creates function to handle form submission 
 function handleSubmit(e) {
-    e.preventDefault()
-    console.log(e)
-
+    e.preventDefault();
+    
     const newCriminal = {
         name: e.target.name.value,
         image: e.target.image.value,
         crimes: e.target.crimes.value,
         warning: e.target.warning.value,
         reward: e.target.reward.value,
-        path: "wanted/friends"
+        path: "/wanted/friends"
     }
+    
+    
     fetch("http://localhost:3000/friends", {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
-          },
+        },
         body: JSON.stringify(newCriminal)
     })
+    // Pessimistic approach 
     .then(res => res.json())
-    .then(console.log)
+    .then(obj => console.log(obj))
     .catch(err => console.log(err))
     
     e.target.reset()
 }
 
+function extractFriendInfo(friendObj) {
+    const name = friendObj.name.toUpperCase();
+    const image = friendObj.image;
+    const crimes = friendObj.crimes;
+    const warning = friendObj.warning.toUpperCase();
+    const reward = `The FBI is offering a reward of $${friendObj.reward} for the capture of ${friendObj.name}.`;
+    const path = friendObj.path;
 
 
-
-
-
-
-
-
-
-
-   
-       
+    wantedList.prepend(createWantedDiv(name, image, crimes, path, reward, warning))
+}
