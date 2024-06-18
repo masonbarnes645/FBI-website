@@ -1,12 +1,7 @@
-let criminalList;
-
 function getData(url) {
     fetch(url)
     .then(res => res.json())
-    .then(people => {
-        criminalList = people
-        people.items.forEach(extractInfo)
-    })
+    .then(jsonObj => jsonObj.items.forEach(extractInfo))
     .catch(err => console.log(err))
 }
 
@@ -112,6 +107,23 @@ function searchData() {
     })
 };
 
+const formRevealButton = document.querySelector("#new-criminal-button")
+formRevealButton.addEventListener("click", (e) => console.log(`Button was clicked ${e}`))
+
+const form = document.querySelector('#new-criminal-form')
+form.addEventListener("submit", handleSubmit)
+
+function handleSubmit(e) {
+    e.preventDefault()
+    console.log(e)
+
+    const newCriminal = {
+        name: e.target.name.value,
+        image: e.target.image.value,
+        
+    }
+
+}
 
 
 
