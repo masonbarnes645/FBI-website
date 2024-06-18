@@ -105,7 +105,9 @@ const searchBar = document.querySelector('#search-bar input')
 let arrayValue = 0
 let missingButtonProp = false
 const missingButton = document.querySelector('#toggle-switch')
+const clearButton = document.querySelector('#reset-switch')
 missingButton.addEventListener('click', switchProp)
+clearButton.addEventListener('click', clearFilter)
 searchBar.addEventListener('input', searchData)
 
 function dataSearch(array) {
@@ -122,16 +124,6 @@ function dataSearch(array) {
 function searchData() {
     const fugitiveList = document.querySelectorAll('#wanted-list > div');
     const fugitiveArray = Array.from(fugitiveList);
-    const missingArray = fugitiveArray.filter(child => {
-        let className = child.className;
-         return className === 'missing-divs';
-     });
-    const crimArray = fugitiveArray.filter(child => {
-        let className = child.className;
-         return className === 'wanted-divs';
-     });
-    
-    console.log(missingArray)
      dataSearch(fugitiveArray);  
 };
 // changes style of divs to hid them, invoked thru switchprop
@@ -175,7 +167,16 @@ function switchProp() {
 
 }
 
+function clearFilter() {
+    const fugitiveList = document.querySelectorAll('#wanted-list > div');
+    if (missingButtonProp === true) {
+        fugitiveList.forEach(child => {
 
+            child.style.display = '';
+
+        })
+    }
+}
 
 
 
