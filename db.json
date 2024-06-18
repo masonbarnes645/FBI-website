@@ -1,3 +1,20 @@
 {
-    "friends": []
+  "friends": [
+    {
+      "id": "6617",
+      "name": "test",
+      "image": "https://repository-images.githubusercontent.com/260096455/47f1b200-8b2e-11ea-8fa1-ab106189aeb0",
+      "crimes": "test",
+      "warning": "test",
+      "reward": "test"
+    },
+    {
+      "id": "0692",
+      "name": "test 2",
+      "image": "https://repository-images.githubusercontent.com/260096455/47f1b200-8b2e-11ea-8fa1-ab106189aeb0",
+      "crimes": "test 2",
+      "warning": "test 2",
+      "reward": "test 2"
+    }
+  ]
 }

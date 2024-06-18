@@ -28,14 +28,16 @@ function extractInfo(wantedObj) {
 
     const image = wantedObj.images[0].large;
     const description = wantedObj.description;
-    const path = wantedObj.path
+    const path = wantedObj.path;
 
-    const reward = wantedObj.reward_text
-    const warning = wantedObj.warning_message
+    const reward = wantedObj.reward_text;
+    const warning = wantedObj.warning_message;
 
     //If statement to exclude missing persons 
     if (!path.includes("missing-persons")) {
-            createWantedDiv(name, image, description, path, reward, warning)
+        // Run appendChild here instead of in the create wanted div function so that we can re-use
+        // createWantedDiv but prepend a div with our friends on it
+            wantedList.appendChild(createWantedDiv(name, image, description, path, reward, warning))
         }
 }
 
@@ -85,7 +87,8 @@ function createWantedDiv (name, image, description, path, reward, warning) {
        div.classList.remove("detail-view")
     })
 
-    wantedList.appendChild(div)
+    // Return the div so we can append or prepend it to the wanted list
+    return div
 
 }
 
@@ -120,9 +123,23 @@ function handleSubmit(e) {
     const newCriminal = {
         name: e.target.name.value,
         image: e.target.image.value,
-        
+        crimes: e.target.crimes.value,
+        warning: e.target.warning.value,
+        reward: e.target.reward.value,
+        path: "wanted/friends"
     }
-
+    fetch("http://localhost:3000/friends", {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+          },
+        body: JSON.stringify(newCriminal)
+    })
+    .then(res => res.json())
+    .then(console.log)
+    .catch(err => console.log(err))
+    
+    e.target.reset()
 }
 
 
