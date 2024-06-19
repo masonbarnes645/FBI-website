@@ -21,6 +21,7 @@ getData('http://localhost:3000/friends', handleFriendReturn)
 //! Global variables
 const wantedList = document.querySelector("#wanted-list")
 
+
 // Extracts info from a wanted obj and creates a div for it 
 // as long as that person is not a missing person
 function extractInfo(wantedObj) {
@@ -44,12 +45,14 @@ function extractInfo(wantedObj) {
     const warning = wantedObj.warning_message;
 
     //If statement to exclude missing persons 
-    if (!path.includes("missing-persons")) {
-        // Run appendChild here instead of in the create wanted div function so that we can re-use
-        // createWantedDiv but prepend a div with our friends on it
-            createWantedDiv(name, image, description, path, reward, warning, "append")
-        }
+    
+       
+    createWantedDiv(name, image, description, path, reward, warning, "append")
+      
+        
+    
 }
+
 
 
 // Create the div elements for each wanted person
@@ -68,7 +71,9 @@ function createWantedDiv (name, image, description, path, reward, warning, posit
 
     //Give each div a unique id and a class name for CSS
     div.id = name.split(' ').join("-").split(",").join('')
-    div.className = "wanted-divs"
+    if (path.includes("missing-persons")) div.className = "missing-divs"
+        else if (path.includes("kidnap")) div.className = "missing-divs"
+        else div.className = 'wanted-divs'
 
 
     img.src = image
@@ -109,25 +114,89 @@ function createWantedDiv (name, image, description, path, reward, warning, posit
         trashIcon.addEventListener("click", (e) => deleteFriend(div, id))
     }
 
-}
+ 
 
+}
+ 
 
 const searchBar = document.querySelector('#search-bar input')
+let arrayValue = 0
+let missingButtonProp = false
+const missingButton = document.querySelector('#toggle-switch')
+const clearButton = document.querySelector('#reset-switch')
+missingButton.addEventListener('click', switchProp)
+clearButton.addEventListener('click', clearFilter)
 searchBar.addEventListener('input', searchData)
+
+function dataSearch(array) {
+    array.forEach(function (child) {
+        const childText = child.querySelector('h3').textContent.toUpperCase();
+        if (!childText.includes(searchBar.value.toUpperCase())) {
+            child.classList.add('hide')
+        } else {
+            child.classList.remove('hide')
+        }
+    });
+}
+ 
 function searchData() {
     const fugitiveList = document.querySelectorAll('#wanted-list > div');
     const fugitiveArray = Array.from(fugitiveList);
-    fugitiveArray.forEach(function (child) {
-        const childText = child.querySelector('h3').textContent.toUpperCase()
-        if (!childText.includes(searchBar.value.toUpperCase())) {
-            child.style.display = "none"
-        }
-        else {
-            child.style.display = ""
-        }
-
-    })
+     dataSearch(fugitiveArray);  
 };
+// changes style of divs to hid them, invoked thru switchprop
+function displayChange() {
+    const fugitiveList = document.querySelectorAll('#wanted-list > div');
+    
+        fugitiveList.forEach(child => {
+            let className = child.className; 
+            if (missingButtonProp){ 
+                if (className === 'missing-divs') { 
+                    child.style.display = '';
+                } else {
+                    child.style.display = 'none';
+                }
+            } else {
+       
+                if (className === 'wanted-divs') { 
+                    child.style.display = '';
+                } else {
+                    child.style.display = 'none';
+                }
+        };
+    })
+}
+// changes button text content, boolean, hides unwanted divs w/ displayChange
+function switchProp() {
+    if (missingButtonProp) {      
+        missingButtonProp = false
+        missingButton.textContent = 'View Missing Persons'
+       
+    }
+    else { 
+        missingButtonProp = true
+        missingButton.textContent = 'View Wanted Criminals'
+        
+        
+    }
+displayChange()
+}
+
+function clearFilter() {
+    const fugitiveList = document.querySelectorAll('#wanted-list > div');{
+        fugitiveList.forEach(child => {
+            child.style.display = '';
+            arrayValue = 0
+        })
+    }
+}
+
+
+
+
+
+
+
 
 const formRevealButton = document.querySelector("#new-criminal-button")
 formRevealButton.addEventListener("click", (e) => console.log(`Button was clicked ${e}`))

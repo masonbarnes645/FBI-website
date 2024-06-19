@@ -23,9 +23,24 @@ h1 {
     outline-color: black;
     width: 25%;
     height: 25%;
+    display: block;
 }
 
 .wanted-divs h3 {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.missing-divs {
+    border: 3px solid black;
+    outline-color: black;
+    width: 25%;
+    height: 25%;
+    display: block;
+}
+
+.missing-divs h3 {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
 
@@ -42,4 +57,12 @@ img {
    width: 202px;
    border: solid;
    
+}
+
+.hide {
+    display:none;
+}
+
+.show {
+    display: block;
 }
