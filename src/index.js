@@ -158,7 +158,6 @@ function handleSubmit(e) {
         body: JSON.stringify(newCriminal)
     }) 
 
-    
     .then(res => {
         // If optimistic approach didn't work, remove the div you added
         if (!res.ok) {
