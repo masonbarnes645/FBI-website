@@ -108,3 +108,16 @@ img {
     height: 600px;
     z-index: 20;
 }
+
+button{
+    background-color: #FFD700;
+    color: #14213d;
+    border-radius: 12px;
+    font-size: 15px;
+    
+}
+
+#new-criminal-button{
+    float: right;
+    margin-right: 40px;
+}
