@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <!-- import uuidv4 -->
+    <script src="https://cdn.jsdelivr.net/npm/uuid@latest/dist/umd/uuidv4.min.js"></script>
+    <!-- import font awesome for trash icon -->
+    <script src="https://kit.fontawesome.com/a26b0cae6d.js" crossorigin="anonymous"></script>
     <script defer src='src/index.js'></script> 
     <title>Most Wanted</title>
 </head>
@@ -12,6 +16,22 @@
         <h1>Most Wanted</h1>
     </div>
     <div id='search-bar'><input type="text" placeholder="Search..."></div>
+    <div id="add-criminal">
+        <button id="new-criminal-button">New Criminal</button>
+        <form id="new-criminal-form" class='hide'>
+            <label for="name">Name:</label><br>
+            <input type="text" id="name"><br>
+            <label for="image">Image URL:</label><br>
+            <input type="text" id="image"><br>
+            <label for="crimes">Crimes (separate with semicolons):</label><br>
+            <input type="text" id="crimes"><br>
+            <label for="warning">Warning:</label><br>
+            <input type="text" id="warning"><br>
+            <label for="reward">Reward Amount (include commas but no dollar sign):</label><br>
+            <input type="text" id="reward"><br>
+            <input type="submit" id="submit">
+        </form>
+    </div>
     <button type="button" id="toggle-switch">View Missing Persons</button>
     <button type="button" id="reset-switch">Clear Filter</button>
     <div id='wanted-list' class="flex-container" style='display: -moz-grid-line'></div>
