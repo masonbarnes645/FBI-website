@@ -1,3 +1,13 @@
 {
-  "friends": []
+  "friends": [
+    {
+      "id": "19d5",
+      "name": "Test",
+      "image": "https://repository-images.githubusercontent.com/260096455/47f1b200-8b2e-11ea-8fa1-ab106189aeb0",
+      "crimes": "Excessive cuteness",
+      "warning": "Too cute",
+      "reward": "900,000",
+      "path": "/wanted/friends"
+    }
+  ]
 }
