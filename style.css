@@ -3,33 +3,42 @@
     overflow: hidden;
   }
 
+body{
+    background-color: #e5e5e5;
+    
+}
 h1 { 
-    color:red;
+    color:#e5e5e5;
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+    
 
 }
 
 .header {
     padding: 60px;
-    background-color: rgb(91, 34, 236);
+    background-color: #14213d;
 }
 
-.flex-container {
+ .cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
- 
-
+    padding-left: 6%;
 }
 
-.wanted-divs {
+
+/* .wanted-divs {
     border: 3px solid black;
     outline-color: black;
     width: 25%;
-    height: 25%;
+    height: 450px;
     display: block;
-}
+    display: inline-block;
+    overflow: hidden;
+    margin-right: 5%;
+    margin-left: 5%;
+} */
 
 .wanted-divs h3 {
     text-align: center;
@@ -37,12 +46,18 @@ h1 {
 
 }
 
-.missing-divs {
+.missing-divs, .wanted-divs {
     border: 3px solid black;
     outline-color: black;
     width: 25%;
-    height: 25%;
+    height: 525px;
     display: block;
+    display: inline-block;
+    overflow: hidden;
+    margin-right: 3%;
+    margin-left: 3%;
+    margin-top: 30px;
+
 }
 
 .missing-divs h3 {
@@ -53,8 +68,9 @@ h1 {
 
 
 img {
-    padding-left: 7.5%;
-    width: 85%;
+    padding-left: 15%;
+    width: 70%;
+    height: 350px;
 }
 
 #search-bar input[type=text] {
@@ -71,3 +87,8 @@ img {
 .show {
     display: block;
 }
+
+.detail-view{
+    height: 600px;
+    z-index: 20;
+}   
