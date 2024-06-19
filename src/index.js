@@ -1,19 +1,22 @@
-function getData(url) {
+// One reuseable function for getting data from a URL
+function getData(url, func) {
     fetch(url)
     .then(res => res.json())
-    .then(jsonObj => jsonObj.items.forEach(extractInfo))
+    .then(returnValue => func(returnValue))
     .catch(err => console.log(err))
 }
 
-function getFriendData(url) {
-    fetch(url)
-    .then(res => res.json())
-    .then(list => list.forEach(extractFriendInfo))
-    .catch(err => console.log(err))
+
+function handleFBIReturn(jsonObj){
+    jsonObj.items.forEach(extractInfo)
 }
 
-getData('https://api.fbi.gov/wanted/v1/list')
-getFriendData('http://localhost:3000/friends')
+function handleFriendReturn(list) {
+    list.forEach(extractFriendInfo)
+}
+
+getData('https://api.fbi.gov/wanted/v1/list', handleFBIReturn)
+getData('http://localhost:3000/friends', handleFriendReturn)
 
 //! Global variables
 const wantedList = document.querySelector("#wanted-list")
@@ -58,8 +61,6 @@ function createWantedDiv (name, image, description, path, reward, warning, posit
     const h3 = document.createElement("h3")
     const img = document.createElement("img")
     const pDescription = document.createElement("p")
-    const pPath = document.createElement("p")
-
     const pWarning = document.createElement("p")
     const pReward = document.createElement("p")
 
@@ -76,10 +77,10 @@ function createWantedDiv (name, image, description, path, reward, warning, posit
     h3.textContent = name
 
     pDescription.textContent = description
-    pPath.textContent = path
 
-    div.append(h3, img, pDescription, pPath)
+    div.append(h3, img, pDescription)
     
+    // Add event listener for mouseover
     div.addEventListener("mouseover", (e) => {
         pWarning.textContent = warning
         pReward.textContent = reward
@@ -88,6 +89,7 @@ function createWantedDiv (name, image, description, path, reward, warning, posit
         div.append(pWarning, pReward)
     })
 
+    // Add event listener for mouse leave
     div.addEventListener("mouseleave", (e) => {
        pWarning.remove()
        pReward.remove()
@@ -95,8 +97,12 @@ function createWantedDiv (name, image, description, path, reward, warning, posit
        div.classList.remove("detail-view")
     })
 
+    // Ternary to determine whether to append or prepend the div element based on 
+    // the arg passed to the function
     position === "prepend" ? wantedList.prepend(div) : wantedList.append(div)
 
+    // If the object was created by us, it will have the path friends
+    // If it has the path friends, add a trash can icon with a click listener
     if (path.includes("friends")){
         div.innerHTML += `<i id="trash-${div.id}" class="fa-solid fa-trash"></i>`
         const trashIcon = document.querySelector(`#trash-${div.id}`)
@@ -140,7 +146,7 @@ function handleSubmit(e) {
         warning: e.target.warning.value,
         reward: e.target.reward.value,
         path: "/wanted/friends",
-        id: uuidv4().slice(0,4)
+        id: uuidv4().slice(0,4)     // Create unique 4 character id for JSON obj
     }
     
     
@@ -167,12 +173,13 @@ function handleSubmit(e) {
     
 }
 
+// Extract info from a friend obj for page load 
 function extractFriendInfo(friendObj) {
     const name = friendObj.name.toUpperCase();
     const image = friendObj.image;
     const crimes = friendObj.crimes;
     const warning = friendObj.warning.toUpperCase();
-    const reward = `The FBI is offering a reward of $${friendObj.reward} for the capture of ${friendObj.name}.`;
+    const reward = `The FBI is offering a reward of $${friendObj.reward} for information that leads to the the capture of ${friendObj.name}.`;
     const path = friendObj.path;
     const id = friendObj.id
 
@@ -180,16 +187,12 @@ function extractFriendInfo(friendObj) {
     createWantedDiv(name, image, crimes, path, reward, warning, "prepend", id)
 }
 
-function deleteFriend(wantedDiv, id) {
-    const currentDivHTML = wantedDiv.innerHTML
-    
-    wantedDiv.remove()
-    
-    fetch(`http://localhost:3000/friends/${id}`, {method: 'DELETE'})
-    .then(res => {
-        if (!res.ok){
-            wantedList.innerHTML = currentDivHTML
-        }
 
-    })
+// Function to delete a friend div we have created using a DELETE request
+function deleteFriend(wantedDiv, id) {
+    // Pessimistic approach 
+    fetch(`http://localhost:3000/friends/${id}`, {method: 'DELETE'})
+    .then(res => res.json())
+    .then(() => wantedDiv.remove())
+    .catch(err => console.log(err))
 }
