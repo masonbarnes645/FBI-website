@@ -93,6 +93,11 @@ img {
     margin-bottom: 15px;
     width: 202px;
     border: solid;
+    border-color: #FFD700;
+    margin-top: 10px;
+    color: #14213d;
+    border-radius: 8px;
+    cursor: pointer;
 
 }
 
@@ -114,7 +119,14 @@ button{
     color: #14213d;
     border-radius: 12px;
     font-size: 15px;
+    cursor: pointer;
+    border-color: #FFD700;
     
+    
+}
+button:hover {
+    background-color: #14213d;
+    color: #FFD700;
 }
 
 #new-criminal-button{
