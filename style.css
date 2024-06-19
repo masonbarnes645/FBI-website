@@ -1,44 +1,59 @@
 .collapsed {
     max-height: 0;
     overflow: hidden;
-  }
-
-body{
-    background-color: #e5e5e5;
-    
 }
-h1 { 
-    color:#e5e5e5;
+
+body {
+    background-color: #e5e5e5;
+
+}
+
+h1 {
+    color: #e5e5e5;
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-wrap:pretty;
     
-    
+
+
 
 }
 
 .header {
     padding: 60px;
     background-color: #14213d;
+    border-style: solid;
+    border-color: #FFD700;
+    display: flex;
+    align-items: safe;
+    justify-content: space-evenly;
+    text-align: center;
+
 }
 
- .cards {
+#seal2 {
+    width: 150px;
+    height: auto;
+    margin-left: 10%;
+    padding-right: 10%;
+
+
+
+}
+#seal1 {
+    width: 150px;
+    height: auto;
+    margin-right: 10%;
+
+
+}
+
+.cards {
     display: flex;
     flex-wrap: wrap;
     padding-left: 6%;
 }
 
-
-/* .wanted-divs {
-    border: 3px solid black;
-    outline-color: black;
-    width: 25%;
-    height: 450px;
-    display: block;
-    display: inline-block;
-    overflow: hidden;
-    margin-right: 5%;
-    margin-left: 5%;
-} */
 
 .wanted-divs h3 {
     text-align: center;
@@ -46,7 +61,8 @@ h1 {
 
 }
 
-.missing-divs, .wanted-divs {
+.missing-divs,
+.wanted-divs {
     border: 3px solid black;
     outline-color: black;
     width: 25%;
@@ -74,21 +90,21 @@ img {
 }
 
 #search-bar input[type=text] {
-   margin-bottom: 15px;
-   width: 202px;
-   border: solid;
-   
+    margin-bottom: 15px;
+    width: 202px;
+    border: solid;
+
 }
 
 .hide {
-    display:none;
+    display: none;
 }
 
 .show {
     display: block;
 }
 
-.detail-view{
+.detail-view {
     height: 600px;
     z-index: 20;
-}   
+}
