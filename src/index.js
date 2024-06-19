@@ -196,7 +196,7 @@ function clearFilter() {
 
 
 
-};
+
 
 const formRevealButton = document.querySelector("#new-criminal-button")
 formRevealButton.addEventListener("click", (e) => console.log(`Button was clicked ${e}`))
