@@ -157,11 +157,14 @@ function handleSubmit(e) {
         },
         body: JSON.stringify(newCriminal)
     }) 
+
+    
     .then(res => {
+        // If optimistic approach didn't work, remove the div you added
         if (!res.ok) {
             wantedList.children[0].remove()
         }
-
+        // Otherwise, reset the form so you know it was successful
         else {
             e.target.reset()
         }
