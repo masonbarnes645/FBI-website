@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <!-- import uuidv4 -->
-    <script src="https://cdn.jsdelivr.net/npm/uuid@latest/dist/umd/uuidv4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uuid@latest/dist/umd/uuidv4.min.js" alt="FBI Seal"></script>
     <!-- import font awesome for trash icon -->
     <script src="https://kit.fontawesome.com/a26b0cae6d.js" crossorigin="anonymous"></script>
     <script defer src='src/index.js'></script> 
-    <title>Most Wanted</title>
+    <title>FBI's Most Wanted</title>
 </head>
 <body>
     <div class="header"> 
-        <h1>Most Wanted</h1>
+        <img id= "seal2" src="https://www.fbi.gov/image-repository/fbi-seal.jpg"/>
+        <h1 class="page-title">FBI's Most Wanted</h1>
+        <img id= "seal1" src="https://www.fbi.gov/image-repository/fbi-seal.jpg"/>
     </div>
     <div id='search-bar'><input type="text" placeholder="Search..."></div>
     <div id="add-criminal">
@@ -34,7 +36,7 @@
     </div>
     <button type="button" id="toggle-switch">View Missing Persons</button>
     <button type="button" id="reset-switch">Clear Filter</button>
-    <div id='wanted-list' class="flex-container" style='display: -moz-grid-line'></div>
+    <div id='wanted-list' class= 'cards'></div>
     
 </body>
 </html>
