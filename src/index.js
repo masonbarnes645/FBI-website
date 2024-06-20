@@ -193,11 +193,6 @@ function clearFilter() {
 
 
 
-
-
-
-
-
 const formRevealButton = document.querySelector("#new-criminal-button")
 const newCriminalForm = document.querySelector("#new-criminal-form")
 formRevealButton.addEventListener("click", (e) => toggleCriminalForm())
@@ -205,6 +200,7 @@ formRevealButton.addEventListener("click", (e) => toggleCriminalForm())
 const form = document.querySelector('#new-criminal-form')
 form.addEventListener("submit", handleSubmit)
 
+// Function to toggle the form to create a new criminal
 function toggleCriminalForm (){
     const criminalFormHidden = newCriminalForm.classList.toggle('collapsed')
     if (criminalFormHidden) {
