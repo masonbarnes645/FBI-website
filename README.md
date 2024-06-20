@@ -24,3 +24,9 @@ Our app includes a couple JS event listeners:
 - Mason Barnes [GITHUB](https://github.com/masonbarnes645)
 - Connor Page [GITHUB](https://github.com/connorpage1/)
 - [FBI Most Wanted API](https://api.fbi.gov/wanted/v1/list)
+
+## What is this?
+This app was built by Mason Barnes and Connor Page for educational purposes as part of Flatiron School's Software Engineering bootcamp.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
