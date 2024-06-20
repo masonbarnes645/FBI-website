@@ -20,30 +20,31 @@ h1 {
 }
 
 .header {
-    padding: 60px;
+    padding-bottom: 60px;
     background-color: #14213d;
     border-style: solid;
     border-color: #FFD700;
     display: flex;
-    align-items: safe;
     justify-content: space-evenly;
     text-align: center;
 
 }
 
-#seal2 {
+ #seal2 {
     width: 150px;
     height: auto;
-    margin-left: 10%;
-    padding-right: 10%;
+    float:left;
+    padding-left: 0%;
 
 
 
 }
-#seal1 {
+ #seal1 {
     width: 150px;
     height: auto;
-    margin-right: 10%;
+    padding-left: 0%;
+    float: right;
+    
 
 
 }
@@ -73,6 +74,7 @@ h1 {
     margin-right: 3%;
     margin-left: 3%;
     margin-top: 30px;
+    text-
 
 }
 
